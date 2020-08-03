@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "vrsoftware"
+    }
+  },
+  "defaultProject": "vrsoftware",
+  "cli": {
+    "analytics": "0934790d-1c80-4bc4-a7ba-4006eb9d6a39"
+  }
 }
