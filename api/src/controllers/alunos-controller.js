@@ -1,24 +1,29 @@
 'use strict';
 
-exports.get = (req, resp, next) => {
-  resp.status(200).send({
-    title: "Alunos",
-    version: "0.0.1"
-  });
+const Aluno = require('../models/aluno');
+
+exports.get = (req, resp) => {
+  Aluno.listarAlunos(resp);
 };
 
-exports.post = (req, resp, next) => {
-  resp.status(201).send(req.body);
+exports.getOne = (req, resp) => {
+  const id = parseInt(req.params.id);
+  Aluno.listarAluno(id, resp);
 };
 
-exports.put = (req, resp, next) => {
+exports.post = (req, resp) => {
+  const aluno = req.body;
+  Aluno.cadastrarAluno(aluno, resp);
+};
+
+exports.put = (req, resp) => {
+  const id = parseInt(req.params.id);
+  const aluno = req.body;
+  Aluno.atualizarAluno(id, aluno, resp);
+};
+
+exports.delete = (req, resp) => {
   const id = req.params.id;
-  resp.status(200).send({
-    id: id,
-    item: req.body
-  });
-};
-
-exports.delete = (req, resp, next) => {
+  Aluno.excluirAluno(id, resp);
   resp.status(202).send(req.body);
 };

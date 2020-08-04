@@ -2,13 +2,11 @@
 require('dotenv').config();
 const mysql = require('mysql');
 
-const conexao = mysql.createConnection({
+const conexaoDB = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
+  password: process.env.DB_PASS
 })
 
-module.exports = conexao;
-
+module.exports = conexaoDB;
 
