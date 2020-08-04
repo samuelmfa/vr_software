@@ -5,9 +5,9 @@ import { DetalheCursoService } from './detalhe-curso.service';
 import { SharedModule } from '../../shared/shared.module';
 import { ComponentsModule } from '../../components/components.module';
 import { CursosService } from '../cursos/cursos.service';
+import { HomeService } from '../home/home.service';
 
 import { DetalheCursoRoutingModule } from './detalhe-curso-routing.module';
-
 
 @NgModule({
   declarations: [DetalheCursoComponent],
@@ -17,6 +17,6 @@ import { DetalheCursoRoutingModule } from './detalhe-curso-routing.module';
     SharedModule,
     ComponentsModule
   ],
-  providers: [DetalheCursoService, CursosService]
+  providers: [DetalheCursoService, CursosService, HomeService]
 })
 export class DetalheCursoModule { }

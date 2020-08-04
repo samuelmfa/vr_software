@@ -9,6 +9,11 @@ exports.getOne = (req, resp) => {
   CursosAluno.listarCursosAluno(id, resp);
 };
 
+exports.getAlunos = (req, resp) => {
+  const id = parseInt(req.params.id);
+  CursosAluno.listarAlunosPorCurso(id, resp);
+};
+
 exports.post = (req, resp) => {
   const cursoAluno = req.body;
   CursosAluno.cadastrarCursosAluno(cursoAluno, resp);

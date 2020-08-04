@@ -18,6 +18,7 @@ export class AlunosComponent implements OnInit {
   public aluno: Aluno;
 
   public spinner = false;
+  public loading = false;
 
   public formulario: FormGroup;
 
@@ -41,8 +42,14 @@ export class AlunosComponent implements OnInit {
   }
 
   public listarAlunos(): void {
+
+    this.loading = true;
+
     this.alunosService.listarAlunos().subscribe((resp: any) => {
       this.alunos$ = resp;
+      setTimeout(() => {
+        this.loading = false;
+      }, 1000);
     });
   }
 

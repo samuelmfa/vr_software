@@ -1,11 +1,92 @@
 <div class="container mt-5">
   <div class="pt-5">
-    <h1>Matricular Alunos</h1>
+    <h1>Matricular Aluno</h1>
     <hr class="linha">
   </div>
   <div class="row">
     <div class="col-sm-12">
+      <p-card>
+        <div class="mr-3">
+          <a class="link" data-toggle="collapse" href="#formulario" (click)="limpaForm()">
+            <i class="fas fa-chevron-down mr-2"></i>
+            <span class="">Nova Matricula</span>
+          </a>
+        </div>
+        <div class="collapse mt-3" id="formulario">
+          <form [formGroup]="formulario" (ngSubmit)="novaMatricula()">
+            <div class="form-group">
+              <label>Aluno</label>
+              <select class="form-control" formControlName="codigo_aluno">
+                <option>Escolha um Aluno...</option>
+                <ng-container *ngFor="let aluno of listaAlunos">
+                  <option [value]="aluno.codigo">{{aluno.nome}}</option>
+                </ng-container>
 
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Curso</label>
+              <select class="form-control" formControlName="codigo_curso">
+                <option>Escolha um Curso...</option>
+                <ng-container *ngFor="let curso of listaCursos">
+                  <option [value]="curso.codigo">{{curso.descricao}}</option>
+                </ng-container>
+              </select>
+            </div>
+            <div *ngIf="this.spinner" class="">
+              <button class="btn btn-primary" type="button" disabled>
+                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                Aguarde...
+              </button>
+            </div>
+            <div *ngIf="!this.spinner">
+              <button type="reset" class="btn btn-outline-danger mr-2">Limpar</button>
+              <button type="submit" class="btn btn-outline-primary" [disabled]="!formulario.valid">Matricular</button>
+            </div>
+          </form>
+        </div>
+      </p-card>
+    </div>
+    <div class="col-sm-12 mt-5">
+      <h4> <a type="button" pTooltip="imprimir" tooltipPosition="top" (click)="captureScreen()"><i
+            class="fas fa-print"></i></a>
+        Últimas Matrículas</h4>
+      <hr class="linha">
+    </div>
+    <div class="col-sm-12 mt-3"  id="contentToConvert">
+      <p-card [style]="{backgroundColor: ''}">
+        <p-table [value]="listaCursosAluno" [paginator]="true" [rows]="5" [globalFilterFields]="['nome']" #dt>
+          <ng-template pTemplate="caption">
+            <div style="text-align: right">
+              <div class="input-group mb-2 mt-2">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fa fa-search fa-sm"></i></span>
+                </div>
+                <input type="text" class="form-control" pInputText size="50" placeholder="Buscar..."
+                  (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+              </div>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr class="text-center">
+              <th class="text-center">Aluno</th>
+              <th class="text-center">Curso</th>
+              <th class="text-center">Ações</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-alunoCurso>
+            <tr class="text-center">
+              <td class="text-center">{{ alunoCurso.nome }}</td>
+              <td class="text-center">{{ alunoCurso.descricao }}</td>
+              <td class="text-center">
+                <a style="cursor: pointer;" (click)="cancelarMatricula(alunoCurso.codigo)" pTooltip="Cancel. Matrícula"
+                  tooltipPosition="top"><i class="fas fa-trash fa-lg text-danger"></i></a>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-card>
     </div>
   </div>
 </div>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>

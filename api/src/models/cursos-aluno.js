@@ -3,10 +3,10 @@ const conexao = require('../config/conexao');
 class CursosAlunos {
 
   listarCursosAlunos(resp) {
-    const sql = `SELECT a.nome, c.descricao, c.ementa, ca.codigo, ca.codigo_aluno, ca.codigo_curso FROM curso_aluno ca
+    const sql = `SELECT  ca.codigo, c.descricao, c.ementa, a.nome, ca.codigo_aluno, ca.codigo_curso FROM curso_aluno ca
     INNER JOIN aluno a
     INNER JOIN curso c
-    WHERE ca.codigo_aluno = a.codigo AND ca.codigo_curso = c.codigo ORDER BY a.nome ASC`;
+    WHERE ca.codigo_aluno = a.codigo AND ca.codigo_curso = c.codigo ORDER BY ca.codigo_curso DESC`;
     conexao.query(sql, (erro, resultado) => {
       if (erro) {
         resp.status(400).json(erro);
@@ -24,6 +24,22 @@ class CursosAlunos {
 
     conexao.query(sql, id, (erro, resultado) => {
       let aluno = resultado[0];
+      if (erro) {
+        resp.status(400).json(erro);
+      } else {
+        resp.status(200).json(aluno);
+      }
+    });
+  }
+
+  listarAlunosPorCurso(id, resp) {
+    const sql = `SELECT DISTINCT a.nome FROM curso_aluno ca
+    INNER JOIN aluno a
+    INNER JOIN curso c
+    WHERE ca.codigo_aluno = a.codigo AND ca.codigo_curso = ?  ORDER BY a.nome ASC `;
+
+    conexao.query(sql, id, (erro, resultado) => {
+      let aluno = resultado;
       if (erro) {
         resp.status(400).json(erro);
       } else {

@@ -5,6 +5,7 @@ const controller = require('../controllers/curso-aluno-controller');
 
 router.get('/', controller.get);
 router.get('/:id', controller.getOne);
+router.get('/alunos/:id', controller.getAlunos);
 router.post('/', controller.post);
 router.put('/:id', controller.put);
 router.delete('/:id', controller.delete);

@@ -21,6 +21,26 @@
         </div>
       </p-card>
     </div>
+    <div class="col-sm-12 pt-5">
+      <h4>Alunos Matriculados</h4>
+      <hr class="linha">
+    </div>
+    <div class="col-sm-12 " *ngIf="alunos">
+      <p-card >
+        <div class="container">
+          <div class="row mt-4" *ngIf="alunos.length <= 0">
+            <div class="col-sm-12">
+              <p class="h5">Nenhum Aluno Matriculado Neste Curso</p>
+            </div>
+          </div>
+          <div class="row mt-4" *ngIf="alunos.length > 0" >
+            <div class="col-sm-4" *ngFor="let aluno of alunos">
+              <p class="h5">{{aluno.nome}}</p>
+            </div>
+          </div>
+        </div>
+      </p-card>
+    </div>
   </div>
 </div>
 

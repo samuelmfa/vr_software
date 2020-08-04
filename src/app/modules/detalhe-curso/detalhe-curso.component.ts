@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CursosService } from '../cursos/cursos.service';
+import { HomeService } from '../home/home.service';
 import { Curso } from 'src/app/core/models/curso';
 
 @Component({
@@ -13,12 +14,14 @@ import { Curso } from 'src/app/core/models/curso';
 export class DetalheCursoComponent implements OnInit {
   public id: string;
   public curso: Curso;
+  public alunos: [] = [];
   public loading = false;
   public formulario: FormGroup;
   public spinner = false;
 
   constructor(
     private cursoService: CursosService,
+    private cursosAlunosService: HomeService,
     private toastr: ToastrService,
     private route: ActivatedRoute,
     private router: Router,
@@ -27,7 +30,9 @@ export class DetalheCursoComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = params.id;
       if (this.id !== undefined) {
-        console.log(this.id);
+        this.buscarAlunosMatriculados();
+      } else {
+        this.router.navigate(['/cursos']);
       }
     });
   }
@@ -39,8 +44,12 @@ export class DetalheCursoComponent implements OnInit {
       descricao: ['', [Validators.required]],
       ementa: ['', [Validators.required]]
     });
+  }
 
-
+  public buscarAlunosMatriculados(): void {
+    this.cursosAlunosService.listarAlunosMatriculadosCurso(this.id).subscribe((resp: any) => {
+      this.alunos = resp;
+    });
   }
 
   buscarCurso(id): void {
@@ -64,7 +73,7 @@ export class DetalheCursoComponent implements OnInit {
       if (resp) {
         this.toastr.success('Curso Editado com sucesso!');
         setTimeout(() => {
-         location.href = '/cursos';
+          location.href = '/cursos';
         }, 1000);
       } else {
         this.toastr.error('Erro ao Excluir Curso');
