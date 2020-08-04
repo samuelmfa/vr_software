@@ -1,4 +1,6 @@
 'use strict';
+
+const cors = require('cors');
 const app = require('../src/app');
 const debug = require('debug')('nodestr:server');
 const http = require('http');
@@ -7,6 +9,8 @@ const conexaoDB = require('../src/config/conexaoDB');
 const conexao = require('../src/config/conexao');
 const Tabelas = require('../src/config/tabelas');
 const Banco = require('../src/config/banco');
+
+app.use(cors());
 
 conexaoDB.connect((error) => {
   if (error) {

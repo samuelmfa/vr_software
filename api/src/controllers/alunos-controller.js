@@ -23,7 +23,7 @@ exports.put = (req, resp) => {
 };
 
 exports.delete = (req, resp) => {
-  const id = req.params.id;
+  const id =  parseInt(req.params.id);
   Aluno.excluirAluno(id, resp);
   resp.status(202).send(req.body);
 };

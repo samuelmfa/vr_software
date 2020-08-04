@@ -3,7 +3,7 @@ const conexao = require('../config/conexao');
 class Curso {
 
   listarCursos(resp) {
-    const sql = 'SELECT id, descricao, ementa FROM curso';
+    const sql = 'SELECT codigo, descricao, ementa FROM curso';
     conexao.query(sql, (erro, resultado) => {
       if (erro) {
         resp.status(400).json(erro);
@@ -14,7 +14,7 @@ class Curso {
   }
 
   listarCurso(id, resp) {
-    const sql = `SELECT id, descricao, ementa FROM curso WHERE codigo = ?`;
+    const sql = `SELECT codigo, descricao, ementa FROM curso WHERE codigo = ?`;
     conexao.query(sql, id, (erro, resultado) => {
       let aluno = resultado[0];
       if (erro) {
@@ -26,7 +26,7 @@ class Curso {
   }
 
   cadastrarCurso(aluno, resp) {
-    const sql = 'INSERT INTO aluno SET ?';
+    const sql = 'INSERT INTO curso SET ?';
     conexao.query(sql, aluno, (erro, resultado) => {
       if (erro) {
         resp.status(400).json(erro);
@@ -37,7 +37,7 @@ class Curso {
   }
 
   atualizarCurso(id, valores, resp) {
-    const sql = `UPDATE aluno SET ? WHERE codigo = ?`;
+    const sql = `UPDATE curso SET ? WHERE codigo = ?`;
     conexao.query(sql, [valores, id], (erro, resultado) => {
       if (erro) {
         resp.status(400).json(erro);
@@ -48,7 +48,7 @@ class Curso {
   }
 
   excluirCurso(id, resp) {
-    const sql = 'DELETE FROM aluno WHERE codigo=?';
+    const sql = 'DELETE FROM curso WHERE codigo=?';
     conexao.query(sql, id, (erro, resultado) => {
       if (erro) {
         resp.status(400).json(erro);

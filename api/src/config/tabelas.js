@@ -34,7 +34,7 @@ class Tabelas {
     });
   }
   criarTabelasCursoAluno() {
-    const sql = `CREATE TABLE IF NOT EXISTS curso_aluno (codigo int(11) NOT NULL,
+    const sql = `CREATE TABLE IF NOT EXISTS curso_aluno (codigo int(11) NOT NULL AUTO_INCREMENT,
                                                          codigo_aluno int(11) DEFAULT NULL, codigo_curso int(11) DEFAULT NULL,
                                                          PRIMARY KEY (codigo), KEY FK_curso_aluno_aluno (codigo_aluno),
                                                          KEY FK_curso_aluno_curso (codigo_curso),

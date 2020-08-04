@@ -21,7 +21,7 @@ exports.put = (req, resp) => {
 };
 
 exports.delete = (req, resp) => {
-  const id = req.params.id;
+  const id =  parseInt(req.params.id);
   Curso.excluirCurso(id, resp);
 
 };

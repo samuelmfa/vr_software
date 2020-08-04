@@ -1,28 +1,12 @@
 'use strict';
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
+const controller = require('../controllers/curso-aluno-controller');
 
-router.get('/cursos-alunos', (req, resp, next) => {
-  resp.status(200).send({
-    title: "Curso Alunos",
-    version: "0.0.1"
-  });
-});
-
-router.post('/', (req, resp, next) => {
-  resp.status(201).send(req.body);
-});
-
-router.put('/:id', (req, resp, next) => {
-  const id = req.params.id;
-  resp.status(200).send({
-    id: id,
-    item: req.body
-  });
-});
-
-router.delete('/', (req, resp, next) => {
-  resp.status(202).send(req.body);
-});
+router.get('/', controller.get);
+router.get('/:id', controller.getOne);
+router.post('/', controller.post);
+router.put('/:id', controller.put);
+router.delete('/:id', controller.delete);
 
 module.exports = router;
