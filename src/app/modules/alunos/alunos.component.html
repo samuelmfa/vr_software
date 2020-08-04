@@ -5,9 +5,111 @@
   </div>
   <div class="row">
     <div class="col-sm-12">
-
+      <p-card>
+        <div class="mr-3">
+          <a class="link" data-toggle="collapse" href="#formulario" (click)="limpaForm()">
+            <i class="fas fa-chevron-down mr-2"></i>
+            <span class="">Novo Aluno</span>
+          </a>
+        </div>
+        <div class="collapse mt-3" id="formulario">
+          <form [formGroup]="formulario" (ngSubmit)="gravarNovoAluno()">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Nome</label>
+              <input type="text" class="form-control" formControlName="nome">
+            </div>
+            <div *ngIf="this.spinner" class="">
+              <button class="btn btn-primary" type="button" disabled>
+                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                Aguarde...
+              </button>
+            </div>
+            <div *ngIf="!this.spinner">
+              <button type="reset" class="btn btn-outline-danger mr-2">Limpar</button>
+              <button type="submit" class="btn btn-outline-primary" [disabled]="!formulario.valid">Gravar</button>
+            </div>
+          </form>
+        </div>
+      </p-card>
     </div>
-    <div class="col-sm-12">
+
+    <div class="col-sm-12 mt-5" id="contentToConvert">
+      <div class="py-3">
+        <h3>
+          <a type="button" pTooltip="imprimir" tooltipPosition="top" (click)="captureScreen()"><i
+              class="fas fa-print"></i></a> Lista de Alunos
+        </h3>
+        <hr class="linha">
+      </div>
+      <div class="row">
+        <div class="col-sm-12 p-3">
+          <p-card [style]="{backgroundColor: ''}">
+            <p-table [value]="alunos$" [paginator]="true" [rows]="10" [globalFilterFields]="['nome']" #dt>
+              <ng-template pTemplate="caption">
+                <div style="text-align: right">
+                  <div class="input-group mb-2 mt-2">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fa fa-search fa-sm"></i></span>
+                    </div>
+                    <input type="text" class="form-control" pInputText size="50" placeholder="Buscar..."
+                      (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                  </div>
+                </div>
+              </ng-template>
+              <ng-template pTemplate="header">
+                <tr class="text-center">
+                  <th class="text-center">Nome</th>
+                  <th class="text-center">Ações</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-aluno>
+                <tr class="text-center">
+                  <td class="text-center">{{ aluno.nome }}</td>
+                  <td class="text-center">
+                    <a style="cursor: pointer;" (click)="buscarAluno(aluno)" data-toggle="modal"
+                      data-target="#modalEditar">
+                      <i class="fas fa-edit fa-lg text-primary"></i>
+                    </a>
+                    | <a style="cursor: pointer;" (click)="excluirAluno(aluno)"><i
+                        class="fas fa-trash fa-lg text-danger"></i></a>
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </p-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalEditar">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <h5 class="modal-title text-white" id="exampleModalLabel">Editar Aluno</h5>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="formulario" (ngSubmit)="editarAluno()">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Nome</label>
+            <input type="text" class="form-control" formControlName="nome">
+          </div>
+        </div>
+        <div *ngIf="this.spinner" class="modal-footer">
+          <button class="btn btn-primary" type="button" disabled>
+            <span class="spinner-grow spinner-grow-sm"></span>
+            Aguarde...
+          </button>
+        </div>
+        <div *ngIf="!this.spinner" class="modal-footer">
+          <button type="submit" class="btn btn-outline-primary" [disabled]="!formulario.valid">Gravar</button>
+        </div>
+      </form>
 
     </div>
   </div>

@@ -70,7 +70,7 @@ export class CursosComponent implements OnInit {
   }
 
   public captureScreen(): void {
-    let data = document.getElementById('contentToConvert');
+    const data = document.getElementById('contentToConvert');
     html2canvas(data).then(canvas => {
       // Few necessary setting options
       const imgWidth = 208;
@@ -82,7 +82,7 @@ export class CursosComponent implements OnInit {
       const pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
       const position = 0;
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
-      pdf.save('MYPdf.pdf'); // Generated PDF
+      pdf.save('print.pdf'); // Generated PDF
     });
   }
 

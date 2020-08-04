@@ -4,7 +4,7 @@
     <hr class="linha">
   </div>
   <div class="row">
-    <div class="col-sm-8">
+    <div class="col-sm-12">
       <p-card>
         <div class="mr-3">
           <a class="link" data-toggle="collapse" href="#formulario">
@@ -44,7 +44,7 @@
         <hr class="linha">
       </div>
       <div class="row">
-        <div class="col-sm-6 p-2" *ngFor="let curso of cursos$">
+        <div class="col-sm-4 p-2" *ngFor="let curso of cursos$">
           <app-card-cursos [descricao]="curso.descricao" [id]="curso.codigo"></app-card-cursos>
         </div>
       </div>

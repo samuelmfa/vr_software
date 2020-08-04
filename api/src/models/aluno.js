@@ -3,7 +3,7 @@ const conexao = require('../config/conexao');
 class Aluno {
 
   listarAlunos(resp) {
-    const sql = 'SELECT codigo, nome FROM aluno';
+    const sql = 'SELECT codigo, nome FROM aluno order by nome ASC';
     conexao.query(sql, (erro, resultado) => {
       if (erro) {
         resp.status(400).json(erro);
@@ -47,13 +47,13 @@ class Aluno {
     });
   }
 
-  excluirAluno(id, resp) {
+  excluirAluno(codigo, resp) {
     const sql = 'DELETE FROM aluno WHERE codigo=?';
-    conexao.query(sql, id, (erro, resultado) => {
+    conexao.query(sql, codigo, (erro, resultado) => {
       if (erro) {
         resp.status(400).json(erro);
       } else {
-        resp.status(200).json({ id });
+        resp.status(200).json({ codigo });
       }
     })
   }

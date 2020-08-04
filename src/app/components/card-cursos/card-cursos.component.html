@@ -1,13 +1,11 @@
 <p-card>
   <div class="row">
     <div class="col-sm-12">
-      <div class="card">
-        <div class="card-header d-flex justify-content-center p-3">
-         <h5 class="text-success">{{descricao}}</h5>
-        </div>
-        <div class="card-footer">
-          <button class="btn btn-outline-primary btn-block" [routerLink]="['/detalhe-curso', id]">Detalhes</button>
-        </div>
+      <div class="d-flex justify-content-center p-3">
+        <h5 class="text-success">{{descricao}}</h5>
+      </div>
+      <div class="p-3">
+        <button class="btn btn-outline-primary btn-block" [routerLink]="['/detalhe-curso', id]">Detalhes</button>
       </div>
     </div>
   </div>

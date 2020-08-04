@@ -6,8 +6,6 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 
-
-
 @NgModule({
   declarations: [],
   imports: [
