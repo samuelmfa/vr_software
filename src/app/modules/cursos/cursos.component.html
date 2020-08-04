@@ -1,1 +1,54 @@
-<p>cursos works!</p>
+<div class="container mt-5">
+  <div class="pt-5">
+    <h1>Manutenção de Cursos</h1>
+    <hr class="linha">
+  </div>
+  <div class="row">
+    <div class="col-sm-8">
+      <p-card>
+        <div class="mr-3">
+          <a class="link" data-toggle="collapse" href="#formulario">
+            <i class="fas fa-chevron-down mr-2"></i>
+            <span class="">Novo Curso</span>
+          </a>
+        </div>
+        <div class="collapse mt-3" id="formulario">
+          <form [formGroup]="formulario" (ngSubmit)="gravarNovoCurso()">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Descrição</label>
+              <input type="text" class="form-control" formControlName="descricao">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Ementa</label>
+              <textarea class="form-control" formControlName="ementa"></textarea>
+            </div>
+            <div *ngIf="this.spinner" class="">
+              <button class="btn btn-primary" type="button" disabled>
+                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                Aguarde...
+              </button>
+            </div>
+            <div *ngIf="!this.spinner">
+              <button type="reset" class="btn btn-outline-danger mr-2">Limpar</button>
+              <button type="submit" class="btn btn-outline-primary" [disabled]="!formulario.valid">Gravar</button>
+            </div>
+          </form>
+        </div>
+      </p-card>
+    </div>
+    <div class="col-sm-12 mt-5" id="contentToConvert">
+      <div class="py-3">
+        <h3><a type="button" (click)="captureScreen()" pTooltip="imprimir" tooltipPosition="top"><i
+              class="fas fa-print"></i></a> Lista de Cursos </h3>
+
+        <hr class="linha">
+      </div>
+      <div class="row">
+        <div class="col-sm-6 p-2" *ngFor="let curso of cursos$">
+          <app-card-cursos [descricao]="curso.descricao" [id]="curso.codigo"></app-card-cursos>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>

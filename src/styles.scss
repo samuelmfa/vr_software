@@ -1,1 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~ngx-toastr/toastr';
+
+html,
+body {
+  height: 100%;
+  background-color: #f4f4e1;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.linha{
+  border: 1px solid black;
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+input.ng-valid.ng-touched {
+  border: 1px solid green;
+}
+
+textarea.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+textarea.ng-valid.ng-touched {
+  border: 1px solid green;
+}
+
+.link {
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+    cursor: pointer;
+  }
+}

@@ -3,7 +3,7 @@ const conexao = require('../config/conexao');
 class Curso {
 
   listarCursos(resp) {
-    const sql = 'SELECT codigo, descricao, ementa FROM curso';
+    const sql = 'SELECT codigo, descricao, ementa FROM curso order by codigo DESC';
     conexao.query(sql, (erro, resultado) => {
       if (erro) {
         resp.status(400).json(erro);

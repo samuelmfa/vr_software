@@ -1,0 +1,63 @@
+<div class="container mt-5">
+  <div class="pt-5">
+    <h1>Detalhe Curso</h1>
+    <hr class="linha">
+  </div>
+  <div class="row">
+    <div class="col-sm-12 " *ngIf="curso">
+      <p-card>
+        <div class="container">
+          <div class="mt-4 ">
+            <h4 class="text-success">Descrição: {{curso.descricao}}</h4>
+          </div>
+          <div class="mt-4">
+            <h5 class="text: info">Ementa:</h5>
+            <p>{{curso.ementa}}</p>
+          </div>
+          <div class="mt-5">
+            <button class="btn btn-outline-danger mr-3" (click)="excluirCurso(curso.codigo)">Excluir</button>
+            <button class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-editar">Editar</button>
+          </div>
+        </div>
+      </p-card>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal-editar">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <h5 class="modal-title text-white">Editar Curso</h5>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formulario" (ngSubmit)="editarCurso()">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Descrição</label>
+            <input type="text" class="form-control" formControlName="descricao">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Ementa</label>
+            <textarea class="form-control" formControlName="ementa"></textarea>
+          </div>
+          <div *ngIf="this.spinner" class="">
+            <button class="btn btn-primary" type="button" disabled>
+              <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+              Aguarde...
+            </button>
+          </div>
+          <div *ngIf="!this.spinner">
+            <button type="reset" class="btn btn-outline-danger mr-2">Limpar</button>
+            <button type="submit" class="btn btn-outline-primary" [disabled]="!formulario.valid">Gravar</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
