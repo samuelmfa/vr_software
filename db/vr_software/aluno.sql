@@ -20,14 +20,6 @@ CREATE TABLE IF NOT EXISTS `aluno` (
 
 -- Copiando dados para a tabela vr_software.aluno: ~5 rows (aproximadamente)
 DELETE FROM `aluno`;
-/*!40000 ALTER TABLE `aluno` DISABLE KEYS */;
-INSERT INTO `aluno` (`codigo`, `nome`) VALUES
-	(1, 'samuel'),
-	(2, 'joaquim'),
-	(3, 'manuel'),
-	(4, 'julia'),
-	(5, 'gabriela');
-/*!40000 ALTER TABLE `aluno` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;

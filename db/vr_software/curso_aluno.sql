@@ -25,12 +25,6 @@ CREATE TABLE IF NOT EXISTS `curso_aluno` (
 
 -- Copiando dados para a tabela vr_software.curso_aluno: ~0 rows (aproximadamente)
 DELETE FROM `curso_aluno`;
-/*!40000 ALTER TABLE `curso_aluno` DISABLE KEYS */;
-INSERT INTO `curso_aluno` (`codigo`, `codigo_aluno`, `codigo_curso`) VALUES
-	(1, 1, 2),
-	(2, 3, 5);
-/*!40000 ALTER TABLE `curso_aluno` ENABLE KEYS */;
-
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
