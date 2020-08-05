@@ -1,5 +1,5 @@
 # Projeto: VR Software (Teste)
-### Current Version 0.0.1
+### Current Version 1.0.0
 
 ## Sobre o projeto
 Stacks utilizadas no Projeto Angular CLI, Node Js, MySql.
