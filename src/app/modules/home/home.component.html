@@ -17,7 +17,7 @@
             <div class="form-group">
               <label>Aluno</label>
               <select class="form-control" formControlName="codigo_aluno">
-                <option>Escolha um Aluno...</option>
+                <option value="">Escolha um Aluno...</option>
                 <ng-container *ngFor="let aluno of listaAlunos">
                   <option [value]="aluno.codigo">{{aluno.nome}}</option>
                 </ng-container>
@@ -27,7 +27,7 @@
             <div class="form-group">
               <label>Curso</label>
               <select class="form-control" formControlName="codigo_curso">
-                <option>Escolha um Curso...</option>
+                <option  value="">Escolha um Curso...</option>
                 <ng-container *ngFor="let curso of listaCursos">
                   <option [value]="curso.codigo">{{curso.descricao}}</option>
                 </ng-container>
