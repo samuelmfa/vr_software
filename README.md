@@ -15,7 +15,7 @@ Stacks utilizadas no Projeto Angular CLI, Node Js, MySql.
 
 ## Sobre o fluxo de utilização 
 
-### Para Utilização deverá ter cadastrado cursos(Página Cursos) e alunos(Página Alunos), Na pagina home : 
+- Para Utilização deverá ter cadastrado cursos(Página Cursos) e alunos(Página Alunos), Na pagina home será realizado as matriculas dos alunos nos respectivos cursos cadastrados.  
 - Cadastro e manutenção de Alunos  "/alunos";
 - Cadastro e manutenção de Cursos  "/cursos";
 - Visualização detalhada dos cursos cadastrados e seus respectivos alunos inscritos "/cursos/detalhes";
