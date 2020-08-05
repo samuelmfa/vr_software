@@ -55,7 +55,7 @@
     </div>
     <div class="col-sm-12 mt-3"  id="contentToConvert">
       <p-card [style]="{backgroundColor: ''}">
-        <p-table [value]="listaCursosAluno" [paginator]="true" [rows]="5" [globalFilterFields]="['nome']" #dt>
+        <p-table [value]="listaCursosAluno" [paginator]="true" [rows]="5" [globalFilterFields]="['nome','descricao']" #dt>
           <ng-template pTemplate="caption">
             <div style="text-align: right">
               <div class="input-group mb-2 mt-2">
