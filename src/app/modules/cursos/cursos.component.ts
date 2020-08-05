@@ -43,19 +43,19 @@ export class CursosComponent implements OnInit {
     this.curso = Object.assign({}, this.curso, this.formulario.value);
 
     this.cursoService.cadastrarCurso(this.curso).subscribe((resp: any) => {
-      if (resp !== undefined) {
-        this.toaster.success('Novo Curso Cadastrado Com Sucesso!');
-        this.formulario.reset();
-        this.buscarCursos();
-        setTimeout(() => {
-          this.loading = false;
-          this.spinner = false;
-        }, 1000);
-      } else {
-        this.toaster.error('Erro ao Cadastrar novo Curso!');
+
+      this.toaster.success('Novo Curso Cadastrado Com Sucesso!');
+      this.formulario.reset();
+      this.buscarCursos();
+      setTimeout(() => {
         this.loading = false;
         this.spinner = false;
-      }
+      }, 1000);
+
+    }, (erro) => {
+      this.toaster.error('Erro ao Cadastrar novo Curso!');
+      this.loading = false;
+      this.spinner = false;
     });
   }
 

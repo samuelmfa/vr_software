@@ -70,15 +70,13 @@ export class DetalheCursoComponent implements OnInit {
   public editarCurso(): void {
     this.spinner = true;
     this.cursoService.editarCurso(this.formulario.value).subscribe((resp: any) => {
-      if (resp) {
-        this.toastr.success('Curso Editado com sucesso!');
-        setTimeout(() => {
-          location.href = '/cursos';
-        }, 1000);
-      } else {
-        this.toastr.error('Erro ao Excluir Curso');
-        this.spinner = false;
-      }
+      this.toastr.success('Curso Editado com sucesso!');
+      setTimeout(() => {
+        location.href = '/cursos';
+      }, 1000);
+    }, (erro) => {
+      this.toastr.error('Erro ao Excluir Curso');
+      this.spinner = false;
     });
   }
 
@@ -86,14 +84,12 @@ export class DetalheCursoComponent implements OnInit {
     const resposta = confirm('Deseja Excluir este Curso!');
     if (resposta) {
       this.cursoService.excluirCurso(id).subscribe((resp: any) => {
-        if (resp) {
-          this.toastr.success('Excluido com sucesso!');
-          setTimeout(() => {
-            this.router.navigate(['/cursos']);
-          }, 1000);
-        } else {
-          this.toastr.error('Erro ao Excluir Curso');
-        }
+        this.toastr.success('Excluido com sucesso!');
+        setTimeout(() => {
+          this.router.navigate(['/cursos']);
+        }, 1000);
+      }, (erro) => {
+        this.toastr.error('Este Curso Contém Alunos Matriculados');
       });
     }
   }

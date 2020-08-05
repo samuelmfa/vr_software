@@ -62,50 +62,41 @@ export class AlunosComponent implements OnInit {
 
   public excluirAluno(aluno): void {
     this.alunosService.excluirAluno(aluno).subscribe((resp: any) => {
-      if (resp) {
-        this.toaster.success('Aluno Excluido com Sucesso!');
-        this.listarAlunos();
-      } else {
-        this.toaster.error('Erro ao Excluir Aluno!');
-
-      }
-    });
+      this.toaster.success('Aluno Excluido com Sucesso!');
+      this.listarAlunos();
+    },
+      (error) => {
+        this.toaster.error('Este aluno esta matriculado em um curso!');
+      });
 
   }
 
   public gravarNovoAluno(): void {
     this.spinner = true;
     this.alunosService.cadastrarAluno(this.formulario.value).subscribe((resp: any) => {
-      if (resp) {
-        this.toaster.success('Aluno Cadastrado com Sucesso!');
-        this.formulario.reset();
-        this.listarAlunos();
-        this.spinner = false;
-      } else {
-        this.toaster.error('Erro ao Cadastrar Aluno!');
-        this.spinner = false;
-      }
+
+      this.toaster.success('Aluno Cadastrado com Sucesso!');
+      this.formulario.reset();
+      this.listarAlunos();
+      this.spinner = false;
+
+    }, (error) => {
+      this.toaster.error('Erro ao Cadastrar Aluno!');
+      this.spinner = false;
     });
   }
 
   public editarAluno(): void {
     this.spinner = true;
     this.alunosService.editarAluno(this.formulario.value).subscribe((resp: any) => {
-      if (resp) {
-        this.toaster.success('Aluno Editado com Sucesso!');
-        this.formulario.reset();
-        location.href = 'alunos';
-      } else {
-        this.toaster.error('Erro ao Editar Aluno!');
-        this.spinner = false;
-      }
+      this.toaster.success('Aluno Editado com Sucesso!');
+      this.formulario.reset();
+      location.href = 'alunos';
+    }, (error) => {
+      this.toaster.error('Erro ao Editar Aluno!');
+      this.spinner = false;
     });
-
-
   }
-
-
-
 
   public captureScreen(): void {
     const data = document.getElementById('contentToConvert');
