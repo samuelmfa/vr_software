@@ -9,7 +9,7 @@ class CursosAlunos {
     WHERE ca.codigo_aluno = a.codigo AND ca.codigo_curso = c.codigo ORDER BY ca.codigo_curso DESC`;
     conexao.query(sql, (erro, resultado) => {
       if (erro) {
-        resp.status(400).json(erro);
+        resp.status(400).json();
       } else {
         resp.status(200).json(resultado);
       }
@@ -25,7 +25,7 @@ class CursosAlunos {
     conexao.query(sql, id, (erro, resultado) => {
       let aluno = resultado[0];
       if (erro) {
-        resp.status(400).json(erro);
+        resp.status(400).json();
       } else {
         resp.status(200).json(aluno);
       }
@@ -41,7 +41,7 @@ class CursosAlunos {
     conexao.query(sql, id, (erro, resultado) => {
       let aluno = resultado;
       if (erro) {
-        resp.status(400).json(erro);
+        resp.status(400).json();
       } else {
         resp.status(200).json(aluno);
       }

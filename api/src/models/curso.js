@@ -6,7 +6,7 @@ class Curso {
     const sql = 'SELECT codigo, descricao, ementa FROM curso order by codigo DESC';
     conexao.query(sql, (erro, resultado) => {
       if (erro) {
-        resp.status(400).json(erro);
+        resp.status(400).json();
       } else {
         resp.status(200).json(resultado);
       }
@@ -18,7 +18,7 @@ class Curso {
     conexao.query(sql, id, (erro, resultado) => {
       let aluno = resultado[0];
       if (erro) {
-        resp.status(400).json(erro);
+        resp.status(400).json();
       } else {
         resp.status(200).json(aluno);
       }
@@ -29,7 +29,7 @@ class Curso {
     const sql = 'INSERT INTO curso SET ?';
     conexao.query(sql, aluno, (erro, resultado) => {
       if (erro) {
-        resp.status(400).json(erro);
+        resp.status(400).json();
       } else {
         resp.status(201).json(aluno);
       }
@@ -40,7 +40,7 @@ class Curso {
     const sql = `UPDATE curso SET ? WHERE codigo = ?`;
     conexao.query(sql, [valores, id], (erro, resultado) => {
       if (erro) {
-        resp.status(400).json(erro);
+        resp.status(400).json();
       } else {
         resp.status(200).json({...valores, id});
       }
@@ -51,7 +51,7 @@ class Curso {
     const sql = 'DELETE FROM curso WHERE codigo=?';
     conexao.query(sql, id, (erro, resultado) => {
       if (erro) {
-        resp.status(400).json(erro);
+        resp.status(400).json();
       } else {
         resp.status(200).json({ id });
       }

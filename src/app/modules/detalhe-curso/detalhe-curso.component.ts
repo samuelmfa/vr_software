@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CursosService } from '../cursos/cursos.service';
 import { HomeService } from '../home/home.service';
 import { Curso } from 'src/app/core/models/curso';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-detalhe-curso',
@@ -83,14 +84,18 @@ export class DetalheCursoComponent implements OnInit {
   public excluirCurso(id): void {
     const resposta = confirm('Deseja Excluir este Curso!');
     if (resposta) {
-      this.cursoService.excluirCurso(id).subscribe((resp: any) => {
-        this.toastr.success('Excluido com sucesso!');
-        setTimeout(() => {
-          this.router.navigate(['/cursos']);
-        }, 1000);
-      }, (erro) => {
+      if (this.alunos.length <= 0) {
+        this.cursoService.excluirCurso(id).subscribe((resp: any) => {
+          this.toastr.success('Excluido com sucesso!');
+          setTimeout(() => {
+            this.router.navigate(['/cursos']);
+          }, 1000);
+        }, (error) => {
+          this.toastr.error('Erro ao Excluir o curso!');
+        });
+      } else {
         this.toastr.error('Este Curso Contém Alunos Matriculados');
-      });
+      }
     }
   }
 

@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { ToastrModule } from 'ngx-toastr';
 
 import { NgxBootstrapModule } from './ngx-bootstrap/ngx-bootstrap.module';
 import { PrimeNgModule } from './prime-ng/prime-ng.module';
+import { ApiService } from '../services/api.service';
 
 @NgModule({
   declarations: [],
@@ -26,6 +27,10 @@ import { PrimeNgModule } from './prime-ng/prime-ng.module';
     PrimeNgModule,
     NgxLoadingModule,
     ToastrModule
-  ]
+  ], providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: ApiService,
+    multi: true
+  }]
 })
 export class SharedModule { }
