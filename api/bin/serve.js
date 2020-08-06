@@ -11,12 +11,13 @@ const Banco = require('../src/config/banco');
 
 conexaoDB.connect((error) => {
   if (error) {
-    console.log('Erro ao Criar DB no banco!');
+    console.log('Erro ao Connectar com o banco!');
   } else {
+    console.log('Banco concectado com Sucesso!');
     Banco.init(conexaoDB);
     conexao.connect((error) => {
       if (error) {
-        console.log(`Erro ao Conectar no banco! ${error}`);
+        console.log(`Erro ao Criar as Tabelas! ${error}`);
       } else {
         Tabelas.init(conexao);
       }
@@ -31,7 +32,6 @@ server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
-console.log('Banco concectado com Sucesso!');
 console.log(`API Rodando na porta: ${port}`);
 
 
