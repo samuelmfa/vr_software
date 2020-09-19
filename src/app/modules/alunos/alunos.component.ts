@@ -73,17 +73,29 @@ export class AlunosComponent implements OnInit {
 
   public gravarNovoAluno(): void {
     this.spinner = true;
-    this.alunosService.cadastrarAluno(this.formulario.value).subscribe((resp: any) => {
+    this.aluno = Object.assign({}, this.aluno, this.formulario.value);
 
-      this.toaster.success('Aluno Cadastrado com Sucesso!');
+    if (!this.isLowerCase(this.aluno.nome)){
+
+      this.alunosService.cadastrarAluno(this.formulario.value).subscribe((resp: any) => {
+        this.toaster.success('Aluno Cadastrado com Sucesso!');
+        this.formulario.reset();
+        this.listarAlunos();
+        this.spinner = false;
+
+      }, (error) => {
+        this.toaster.error('Erro ao Cadastrar Aluno!');
+        this.spinner = false;
+      });
+
+    } else {
+      this.toaster.error('O nome do Aluno está em Minúsculo');
       this.formulario.reset();
-      this.listarAlunos();
       this.spinner = false;
+    }
 
-    }, (error) => {
-      this.toaster.error('Erro ao Cadastrar Aluno!');
-      this.spinner = false;
-    });
+
+
   }
 
   public editarAluno(): void {
@@ -113,6 +125,10 @@ export class AlunosComponent implements OnInit {
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
       pdf.save('print.pdf'); // Generated PDF
     });
+  }
+
+  public isLowerCase(value: string): boolean {
+    return  /^[a-z0-9_\-]+$/.test(value);
   }
 
 

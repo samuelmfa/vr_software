@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
     public cursoService: CursosService,
     public alunoService: AlunosService,
     public fb: FormBuilder,
-    protected toaster: ToastrService
+    // protected toaster: ToastrService
   ) {
 
     this.formulario = this.fb.group({
@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
     this.buscarInformacoes();
     setTimeout(() => {
       this.loading = false;
-    },1000);
+    }, 1000);
 
   }
 
